@@ -10,8 +10,22 @@ mod tests {
     #[test]
     fn tree_can_add_root() {
         let mut tree = Tree::default();
+
+        tree.insert(3);
+        tree.insert(1);
         tree.insert(2);
-        assert_eq!(tree.root.unwrap().key, 2);
+        tree.insert(4);
+        let root = tree.root.as_ref().unwrap();
+        assert_eq!(root.key, 3);
+
+        let one_leaf = root.left.as_ref().unwrap();
+        assert_eq!(one_leaf.key, 1);
+
+        let two_leaf = one_leaf.right.as_ref().unwrap();
+        assert_eq!(two_leaf.key, 2);
+
+        let four_leaf = root.right.as_ref().unwrap();
+        assert_eq!(four_leaf.key, 4);
     }
 }
 
